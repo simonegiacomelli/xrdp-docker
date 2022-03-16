@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+  xrdp-xfce-debian:
+    container_name: xrdp-xfce-debian
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/bash -i -c 'sleep infinity'
+    ports:
+      - "3389:3389"
