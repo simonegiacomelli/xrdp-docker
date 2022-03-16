@@ -2,6 +2,7 @@ version: '3.2'
 services:
   xrdp-xfce-debian:
     container_name: xrdp-xfce-debian
+    hostname: docker-xrdp
     build:
       context: .
       dockerfile: Dockerfile

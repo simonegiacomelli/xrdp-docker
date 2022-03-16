@@ -48,8 +48,13 @@ ARG PASS="123456"
 RUN useradd -m -s /bin/bash $USER && echo "$USER:$PASS" | chpasswd                                                                                                                                          
 RUN usermod -a -G xrdp demo                                                                                                                                                                                 
 USER demo                                                                                                                                                                                                   
-COPY .xsessionrc /home/demo                                                                                                                                                                                 
+COPY .xsessionrc /home/demo
+ADD .config /home/demo/.config
+RUN curl -s "https://get.sdkman.io" | bash
+# RUN sdk install java 8.322.06.2-amzn
+RUN cd /home/demo && mkdir -p idea && cd idea && wget https://download.jetbrains.com/idea/ideaIC-2021.3.2.tar.gz
 USER root
+RUN chown -R demo:demo /home/demo
 
 COPY entrypoint.sh /entrypoint.sh                                                                                                                                                                           
 RUN ["chmod", "+x", "/entrypoint.sh"]                                                                                                                                                                       
